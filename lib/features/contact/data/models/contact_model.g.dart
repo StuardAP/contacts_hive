@@ -17,18 +17,21 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ContactModel(
-      name: fields[0] as String,
-      phone: fields[1] as String,
+      id: fields[0] as int?,
+      name: fields[1] as String,
+      phone: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ContactModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.id)
       ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
       ..write(obj.phone);
   }
 

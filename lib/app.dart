@@ -1,53 +1,31 @@
-import 'package:contacts_hive/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class App extends StatefulWidget {
+import '../core/services/packages.main.dart' as di;
+import 'features/contact/presentation/bloc/contact_bloc.dart';
+import 'features/contact/presentation/pages/home_page.dart';
+
+class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
-  void dispose() {
-    Hive.box('contacts').compact();
-    Hive.close();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => di.sl<ContactBloc>()),
+      ],
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Hive',
+        title: 'HIVE CRUD',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          primaryColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme:
+              const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
           useMaterial3: true,
         ),
-        home: FutureBuilder(
-          future: Hive.openBox('contacts' , compactionStrategy: (int total, int deleted) {
-            return deleted > 20;
-          }),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return Scaffold(
-                  body: Center(
-                    child: Text('Error: ${snapshot.error}'),
-                  ),
-                );
-              }
-              return const HomePage();
-            } else {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-          },
-        ));
+        home: const HomePage(),
+      ),
+    );
   }
 }

@@ -1,16 +1,26 @@
-# contacts_hive
+# Flutter Contacts App
 
-A new Flutter project.
+A simple contacts application developed with Flutter that uses **Hive** as local database, **GetIt** for dependency injection, **Bloc** for state management and follows the Clean Architecture.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Create, read, update and delete contacts.
+- Store contacts locally using the **Hive** database.
+- Handles dependency injection with **GetIt**.
+- Uses the Bloc pattern for state management.
+- Clean architecture for better code organization and scalability.
 
-A few resources to get you started if this is your first Flutter project:
+## Requirements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter SDK
+- Dart
+- Hive
+- Hive_flutter
+- GetIt
+- Flutter_bloc
+- Equatable (optional, for equal states in Bloc)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+
+![Screenshot 1](assets/app/Screenshot_20241103_184201.jpg)
+![Screenshot 2](assets/app/Screenshot_20241103_184225.jpg)
